@@ -1,0 +1,25 @@
+.login-option-list{
+    width:2.18rem;
+    top:0.7rem;
+    right:0;
+    box-shadow: 0 0 5px #1ba40b;
+}
+.login-option-list-inner{
+    width:100%;
+    background:#fff;
+}
+.login-item{
+    display:flex;
+    font-size:0.3rem;
+    padding-left: 0.2rem;
+    border-bottom:1px solid rgba(104,134,101,0.3);
+}
+.login-item .icon{
+    font-size: 0.5rem;
+    color:#1ba40b;
+}
+.login-item span{
+    align-self: center;
+    width:80%;
+    letter-spacing: 0.7em;
+}
