@@ -1,0 +1,16 @@
+.search-music{
+    width:100%;
+    height:0.66rem;
+    border:1px solid #999;
+    border-radius: 5px;
+    overflow:hidden;
+}
+.search-music-inner{
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+}
+.search-music-inner input.act{
+    box-shadow: -5px -5px 5px #1ba40b;
+}

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import PlayList from "../../components/playList.js";
 import LoginArea from "../../components/loginArea.js";
 import MusicOption from "../../components/musicOptions.js";
+import Search from "../../components/search.js";
 
 
 // layout 布局
@@ -32,6 +33,21 @@ function MusicOptionWrap(props){
 }
 
 
+// 搜索歌曲
+function SearchMusic (props){
+    return <div
+        style={{
+          width:"5.48rem",
+          margin:'0 auto',
+          marginTop:"0.44rem",
+
+        }}
+      >
+        {props.children}
+      </div>;
+}
+
+
 class Index extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +64,11 @@ class Index extends Component {
                 <MusicOptionWrap>
                    <MusicOption></MusicOption>
                 </MusicOptionWrap>
+                <SearchMusic>
+                  <Search>
+                    
+                  </Search>
+                </SearchMusic>
             </IndexBody>
         <Route path={`${this.rootPath}/playList`} component={PlayList} />
       </div>;
