@@ -12,5 +12,22 @@
     flex-direction: row;
 }
 .search-music-inner input.act{
-    box-shadow: -5px -5px 5px #1ba40b;
+    box-shadow: 0px 0px 5px #1ba40b;
+}
+.search-music-inner input{
+    width: 75%;
+    height: 96%;
+    border: none;
+    background: none;
+    outline: none;
+    text-indent: 0.5em;
+    align-self: center;
+    margin-left: 0.02rem;
+}
+.search-music-inner .searchIcon{
+    width: 25%;
+    height: 100%;
+    border: none;
+    background: rgb(27, 164, 11);
+    color: rgb(255, 255, 255);
 }

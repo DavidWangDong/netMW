@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import BaseLay from '../layout/baseLay'
 import "../commonStyles/musicOpt.css";
 
 
@@ -26,20 +27,18 @@ class MusicOpt extends Component {
   }
 
   render() {
-    return <div className={`component ${this.displayName} before pos_rel`}>
-        <div className={`${this.displayName}-inner`}>
-          <div className="music_opt_list">
-            {this.state.optsList.map((val, index) => (
-              <OptItem
-                path={val.path}
-                name={val.name}
-                icon={val.icon}
-                key={"music_opt_list" + index}
-              />
-            ))}
-          </div>
+    return <BaseLay displayName={this.displayName}>
+        <div className="music_opt_list">
+          {this.state.optsList.map((val, index) => (
+            <OptItem
+              path={val.path}
+              name={val.name}
+              icon={val.icon}
+              key={"music_opt_list" + index}
+            />
+          ))}
         </div>
-      </div>;
+      </BaseLay>;
   }
 }
 

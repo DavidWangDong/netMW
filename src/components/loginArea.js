@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import '../commonStyles/loginArea.css'
+import BaseLay from '../layout/baseLay'
 import LoginOption from './loginOptionList'
 
 
@@ -32,23 +33,24 @@ class LoginArea extends Component {
   }
 
   render() {
-    return <div className={`component ${this.displayName} before pos_rel`}>
-        <div className={`${this.displayName}-inner`}>
-          <div className="avatar animate">
-            <img src="//tvax4.sinaimg.cn/default/images/default_avatar_male_180.gif" />>
-          </div>
-          <div className="user-name">用户名称</div>
-          <div className="login-option pos_rel" onClick={()=>this.setState({isShow_opts:!this.state.isShow_opts})}>
-            <i className="icon iconfont icon-setup_fill listIcon" />
-            <LoginOption 
-              isShow={this.state.isShow_opts}
-              onLog={(arg)=>{this.handleLog()}}
-              onOut={(arg)=>{this.handleOut()}}
-              onEx={(arg)=>{this.handleEx()}}
-            />
-          </div>
-        </div>
-      </div>;
+    return <BaseLay displayName={this.displayName}>
+              <div className="avatar animate">
+                <img src="//tvax4.sinaimg.cn/default/images/default_avatar_male_180.gif" />>
+              </div>
+              <div className="user-name">用户名称</div>
+              <div className="login-option pos_rel" onClick={() => this.setState({
+                    isShow_opts: !this.state.isShow_opts
+                  })}>
+                <i className="icon iconfont icon-setup_fill listIcon" />
+                <LoginOption isShow={this.state.isShow_opts} onLog={arg => {
+                    this.handleLog();
+                  }} onOut={arg => {
+                    this.handleOut();
+                  }} onEx={arg => {
+                    this.handleEx();
+                  }} />
+              </div>
+          </BaseLay>;
   }
 }
 

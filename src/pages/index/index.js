@@ -5,6 +5,9 @@ import PlayList from "../../components/playList.js";
 import LoginArea from "../../components/loginArea.js";
 import MusicOption from "../../components/musicOptions.js";
 import Search from "../../components/search.js";
+import List from "../../components/list.js";
+import RecommendList from "../../components/recommendList.js";
+import RecommendSongList from "../../components/recommendSong.js";
 
 
 // layout 布局
@@ -47,6 +50,18 @@ function SearchMusic (props){
       </div>;
 }
 
+// 推荐歌单
+function RecommendedList (props){
+  const style = {
+    margin:'0 auto',
+    marginTop:'0.32rem',
+    width:'5.96rem',
+    paddingBottom:'0.2rem'
+  }
+  const tmpStyle = Object.assign({},style,props.style)
+  return <div style={tmpStyle}>{props.children}</div>;
+} 
+
 
 class Index extends Component {
   constructor(props) {
@@ -57,19 +72,33 @@ class Index extends Component {
 
   render() {
     return <div className={`page page-${this.displayName} pos_rel`}>
-            <IndexHeader>
-              <LoginArea />
-            </IndexHeader>
-            <IndexBody>
-                <MusicOptionWrap>
-                   <MusicOption></MusicOption>
-                </MusicOptionWrap>
-                <SearchMusic>
-                  <Search>
-                    
-                  </Search>
-                </SearchMusic>
-            </IndexBody>
+        <IndexHeader>
+          <LoginArea />
+        </IndexHeader>
+        <IndexBody>
+          <MusicOptionWrap>
+            <MusicOption />
+          </MusicOptionWrap>
+          <SearchMusic>
+            <Search />
+          </SearchMusic>
+          <RecommendedList>
+            <List listTitle="推荐歌单" minHeight="2.1rem">
+              <div style={{ marginTop: "0.2rem" }}>
+                <RecommendList />
+              </div>
+            </List>
+          </RecommendedList>
+          <RecommendedList style={{marginTop:'0.1rem'}}>
+            <List listTitle="最新音乐">
+              <div style={{ marginTop: "0.2rem" }}>
+                <RecommendSongList>
+                  
+                </RecommendSongList>
+              </div>
+            </List>
+          </RecommendedList>
+        </IndexBody>
         <Route path={`${this.rootPath}/playList`} component={PlayList} />
       </div>;
   }

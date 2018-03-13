@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import BaseLay from '../layout/baseLay'
 import '../commonStyles/search.css'
 
 class Search extends Component {
@@ -12,11 +13,26 @@ class Search extends Component {
   }
 
   handleFocus() {
+    if (this.props.handleFocus){
+      this.props.handleFocus(this.state)
+      return
+    }
     this.setState({ inputIsAct: true });
   }
 
   handleBlur() {
+    if (this.props.handleBlur) {
+      this.props.handleBlur(this.state);
+      return;
+    }
     this.setState({ inputIsAct: false });
+  }
+
+  getChange(value){
+    if (this.props.getChange) {
+      this.props.getChange(value);
+      return;
+    }
   }
 
   refCb(dom) {
@@ -24,27 +40,11 @@ class Search extends Component {
   }
 
   render() {
-    let style1 = {
-      width: "75%",
-      height: "100%",
-      border: "none",
-      background: "none",
-      outline: "none",
-      textIndent: ".5em"
-    };
-    let style2 = {
-      width: "25%",
-      height: "100%",
-      border: "none",
-      background: "#1ba40b",
-      color: "#fff"
-    };
+    
     return (
-      <div className={`component ${this.displayName} before pos_rel`}>
-        <div className={`${this.displayName}-inner`}>
+      <BaseLay displayName={this.displayName}>
           <input
-            className={`${this.state.inputIsAct ? "act" : ""}`}
-            style={style1}
+            className={`${this.state.inputIsAct ? "act" : ""} input`}
             onFocus={() => {
               this.handleFocus();
             }}
@@ -54,19 +54,19 @@ class Search extends Component {
             value={this.state.inputVaue}
             onChange={e => {
               this.setState({ inputVaue: e.target.value });
+              this.getChange(e.target.value);
             }}
             onBlur={() => {
               this.handleBlur();
             }}
           />
-          <span style={style2}>
+          <span className="searchIcon">
             <i
               className="icon iconfont icon-search"
               style={{ fontSize: "0.5rem" }}
             />
           </span>
-        </div>
-      </div>
+      </BaseLay>
     );
   }
 }

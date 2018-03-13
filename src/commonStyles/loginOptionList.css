@@ -1,8 +1,10 @@
 .login-option-list{
+    position:absolute;
     width:2.18rem;
     top:0.7rem;
     right:0;
     box-shadow: 0 0 5px #1ba40b;
+    z-index:10;
 }
 .login-option-list-inner{
     width:100%;
