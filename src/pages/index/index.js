@@ -8,6 +8,7 @@ import Search from "../../components/search.js";
 import List from "../../components/list.js";
 import RecommendList from "../../components/recommendList.js";
 import RecommendSongList from "../../components/recommendSong.js";
+import MicroPlayer from "../../components/microPlayer.js";
 
 
 // layout 布局
@@ -63,6 +64,22 @@ function RecommendedList (props){
 } 
 
 
+// 小型播放器
+function IndexFoot(props) {
+  const style = {
+    height: "1.23rem",
+    background: "#fff",
+    bottom: 0,
+    width:'100%'
+  };
+  return (
+    <div className="pos_abs" style={style}>
+      {props.children}
+    </div>
+  );
+}
+
+
 class Index extends Component {
   constructor(props) {
     super(props);
@@ -83,22 +100,25 @@ class Index extends Component {
             <Search />
           </SearchMusic>
           <RecommendedList>
-            <List listTitle="推荐歌单" minHeight="2.1rem">
+            <List listTitle="推荐歌单" minHeight="2.3rem">
               <div style={{ marginTop: "0.2rem" }}>
                 <RecommendList />
               </div>
             </List>
           </RecommendedList>
-          <RecommendedList style={{marginTop:'0.1rem'}}>
-            <List listTitle="最新音乐">
+          <RecommendedList style={{ marginTop: "0.1rem" }}>
+            <List listTitle="最新音乐" minHeight="2.2rem">
               <div style={{ marginTop: "0.2rem" }}>
-                <RecommendSongList>
-                  
-                </RecommendSongList>
+                <RecommendSongList isShowDeleteOpt={false} />
               </div>
             </List>
           </RecommendedList>
         </IndexBody>
+        <IndexFoot>
+            <MicroPlayer>
+              
+            </MicroPlayer>
+        </IndexFoot>
         <Route path={`${this.rootPath}/playList`} component={PlayList} />
       </div>;
   }

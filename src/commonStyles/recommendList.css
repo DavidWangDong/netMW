@@ -11,7 +11,8 @@
 .recommend_avatar{
     width:100%;
     height:1.32rem;
-
+    background:url('../images/loading.gif') no-repeat center 50%;
+    background-size:50% 50%;
 }
 .recommendInfo{
     bottom:0;
@@ -35,4 +36,5 @@
     font-size:0.16rem;
     height:0.53rem;
     text-align: left;
+    word-break: break-all;
 }

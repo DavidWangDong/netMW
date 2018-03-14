@@ -3,6 +3,7 @@ import classname from'classnames'
 import BaseLay from '../layout/baseLay'
 import '../commonStyles/recommendList.css'
 import "whatwg-fetch";
+import ApiHost from '../config/apihost'
 
 
 
@@ -53,17 +54,18 @@ class RecommendList extends Component{
             pageCount:8,
             currPage:8
         }
+        this.api = "/personalized";
     }
 
 
     
     componentWillMount (){
-        fetch("http://10.205.133.48:8080/personalized")
+        fetch(`${ApiHost}${this.api}`)
           .then(data => data.json())
           .then(json => {
             console.log(json);
             this.setState({ dataList: json.result });
-        });
+          });
         
     }
 

@@ -1,0 +1,37 @@
+.micro_player_wrap{
+        display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 auto;
+    margin-top:0.1rem;
+}
+.song_info{
+    width: 70%;
+    display:flex;
+}
+.song_avatar{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.song_name_auth{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    margin-left: 0.3rem;
+}
+.song_name{
+    font-size: 0.25rem;
+    color: rgb(27, 164, 11);
+}
+.song_auth{
+        font-size: 0.16rem;
+    margin-top: 0.05rem;
+    color: #999;
+}
+
+.song_opt{
+    width:25%;
+}
