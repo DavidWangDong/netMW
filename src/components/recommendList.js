@@ -25,7 +25,7 @@ class SingleList extends Component {
             <div className="recommend_avatar pos_rel animate">
               <img src={picUrl} />
               <p className="recommendInfo pos_abs">
-                <i className="icon iconfont icon-kefu" />
+                <i className="icon fa fa-headphones" />
                 <span>{this.countFilter(playCount)}</span>
                 <i className="icon iconfont icon-bofang" />
               </p>

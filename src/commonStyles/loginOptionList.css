@@ -17,8 +17,10 @@
     border-bottom:1px solid rgba(104,134,101,0.3);
 }
 .login-item .icon{
-    font-size: 0.5rem;
-    color:#1ba40b;
+        font-size: 0.4rem;
+    color: #1ba40b;
+    width: 20%;
+    line-height: 0.7rem;
 }
 .login-item span{
     align-self: center;

@@ -10,7 +10,9 @@ class MicroPlayer extends Component{
     }
     render () {
 
-
+        const style={
+          width:'50%'
+        }
         return <BaseLay displayName={this.displayName}>
             <div className="micro_player_wrap">
               <div className="song_info">
@@ -23,10 +25,13 @@ class MicroPlayer extends Component{
                 </div>
               </div>
               <div className="song_opt">
-                <i className="icon iconfont icon-other" />
-                <i className="icon iconfont icon-bofang" />
-                <i className="icon iconfont icon-bofang" />
+                <i className="icon fa fa-th-list" />
+                <i className="icon fa fa-play-circle-o" />
+                <i className="icon fa fa-step-forward" />
               </div>
+            </div>
+            <div className="micro-time-track pos_rel">
+              <div className="micro-time-track-color pos_abs" style={style} />
             </div>
           </BaseLay>;
             

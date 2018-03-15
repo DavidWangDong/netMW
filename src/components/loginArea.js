@@ -34,23 +34,23 @@ class LoginArea extends Component {
 
   render() {
     return <BaseLay displayName={this.displayName}>
-              <div className="avatar animate">
-                <img src="//tvax4.sinaimg.cn/default/images/default_avatar_male_180.gif" />>
-              </div>
-              <div className="user-name">用户名称</div>
-              <div className="login-option pos_rel" onClick={() => this.setState({
-                    isShow_opts: !this.state.isShow_opts
-                  })}>
-                <i className="icon iconfont icon-setup_fill listIcon" />
-                <LoginOption isShow={this.state.isShow_opts} onLog={arg => {
-                    this.handleLog();
-                  }} onOut={arg => {
-                    this.handleOut();
-                  }} onEx={arg => {
-                    this.handleEx();
-                  }} />
-              </div>
-          </BaseLay>;
+        <div className="avatar animate">
+          <img src="//tvax4.sinaimg.cn/default/images/default_avatar_male_180.gif" />>
+        </div>
+        <div className="user-name">用户名称</div>
+        <div className="login-option pos_rel" onClick={() => this.setState({
+              isShow_opts: !this.state.isShow_opts
+            })}>
+          <i className="icon fa fa-gear listIcon" />
+          <LoginOption isShow={this.state.isShow_opts} onLog={arg => {
+              this.handleLog();
+            }} onOut={arg => {
+              this.handleOut();
+            }} onEx={arg => {
+              this.handleEx();
+            }} />
+        </div>
+      </BaseLay>;
   }
 }
 

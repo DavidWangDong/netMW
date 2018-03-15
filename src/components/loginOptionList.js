@@ -6,7 +6,7 @@ class LoginOption extends Component {
   constructor(props) {
     super(props);
     this.displayName = "login-option-list";
-    this.state = { options: [{ name: "登录", icon: "icon-people_fill", handle: props.onLog }, { name: "登出", icon: "icon-offline_fill", handle: props.onOut }, { name: "切换", icon: "icon-flip", handle: props.onEx }] };
+    this.state = { options: [{ name: "登录", icon: "fa-user", handle: props.onLog }, { name: "登出", icon: "fa-power-off", handle: props.onOut }, { name: "切换", icon: "fa-exchange", handle: props.onEx }] };
   }
 
   render() {
@@ -20,7 +20,7 @@ class LoginOption extends Component {
                     onClick={val.handle}
                     key={"login_op_" + index}
                   >
-                    <i className={`icon iconfont ${val.icon}`} />
+                    <i className={`icon fa ${val.icon}`} />
                     <span>{val.name}</span>
                   </li>
                 ))}

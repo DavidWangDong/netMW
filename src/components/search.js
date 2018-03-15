@@ -41,33 +41,21 @@ class Search extends Component {
 
   render() {
     
-    return (
-      <BaseLay displayName={this.displayName}>
-          <input
-            className={`${this.state.inputIsAct ? "act" : ""} input`}
-            onFocus={() => {
-              this.handleFocus();
-            }}
-            ref={dom => {
-              this.refCb(dom);
-            }}
-            value={this.state.inputVaue}
-            onChange={e => {
-              this.setState({ inputVaue: e.target.value });
-              this.getChange(e.target.value);
-            }}
-            onBlur={() => {
-              this.handleBlur();
-            }}
-          />
-          <span className="searchIcon">
-            <i
-              className="icon iconfont icon-search"
-              style={{ fontSize: "0.5rem" }}
-            />
-          </span>
-      </BaseLay>
-    );
+    return <BaseLay displayName={this.displayName}>
+        <input className={`${this.state.inputIsAct ? "act" : ""} input`} onFocus={() => {
+            this.handleFocus();
+          }} ref={dom => {
+            this.refCb(dom);
+          }} value={this.state.inputVaue} onChange={e => {
+            this.setState({ inputVaue: e.target.value });
+            this.getChange(e.target.value);
+          }} onBlur={() => {
+            this.handleBlur();
+          }} />
+        <span className="searchIcon">
+          <i className="fa fa-search" style={{ fontSize: "0.35rem" }} />
+        </span>
+      </BaseLay>;
   }
 }
 

@@ -26,6 +26,7 @@
 .recommendInfo .icon{
     font-size:0.15rem;
     width:20%;
+    align-self: center;
 }
 .recommendInfo span{
     width:60%;

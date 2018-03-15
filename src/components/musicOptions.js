@@ -6,9 +6,9 @@ import "../commonStyles/musicOpt.css";
 
 
 function OptItem (props) {
-    const style = { display: "flex", flexDirection: "column" ,fontSize:'0.3rem',textDecoration:'none',color:'#1ba40b'};
+    const style = { display: "flex", flexDirection: "column", fontSize: "0.3rem", textDecoration: "none", color: "#1ba40b", justifyContent: "space-between" };
     return <Link to={props.path} style={style}>
-        <i className={`icon iconfont ${props.icon}`} style={{ fontSize: "0.6rem" }} />
+        <i className={`${props.icon}`} style={{ fontSize: "0.6rem" }} />
         <span>{props.name}</span>
       </Link>;
 }
@@ -20,10 +20,10 @@ class MusicOpt extends Component {
     super(props);
     this.displayName = "music-opt";
     
-    let specialIcon ='icon-rili' + (new Date().getDate());
+    let specialIcon ='icon iconfont icon-rili' + (new Date().getDate());
 
 
-    this.state = { optsList: [{ name: "每日推荐", icon: specialIcon, path: "/index" }, { name: "音乐排行", icon: "icon-order_fill", path: "/index" }, { name: "我的歌单", icon: "icon-task_fill", path: "/index" }] };
+    this.state = { optsList: [{ name: "每日推荐", icon: specialIcon, path: "/index" }, { name: "音乐排行", icon: "fa fa-line-chart", path: "/index" }, { name: "我的歌单", icon: "fa fa-file-text", path: "/index" }] };
   }
 
   render() {

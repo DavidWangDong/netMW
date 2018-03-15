@@ -1,3 +1,5 @@
+@import './font-awesome/css/font-awesome.min.css';
+@import './icons/iconfont.css';
 .App {
   text-align: center;
   width:6.4rem;

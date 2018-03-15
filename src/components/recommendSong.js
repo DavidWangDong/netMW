@@ -39,10 +39,10 @@ class SongOption extends Component{
   render () {
 
     return <div className="optList">
-        <i className="icon iconfont icon-play_fill" />
-        <i className="icon iconfont icon-like" />
-        <i className="icon iconfont icon-add" />
-        {this.props.isShowDeleteOpt?<i className="icon iconfont icon-round_close_fill_light" />:null}
+        <i className="icon fa fa-play" />
+        <i className="icon fa fa-heart-o" />
+        <i className="icon fa fa-plus" />
+        {this.props.isShowDeleteOpt ? <i className="icon fa fa-times" /> : null}
       </div>;
   }
 }

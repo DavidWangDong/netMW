@@ -30,12 +30,16 @@ class ListHeader extends Component{
         style3 = {
             transition:'all .5s ease',
             transform:`rotate(${this.state.isShowAll?'180':'0'}deg)`,
-            alignSelf: 'center'
+            alignSelf: 'center',
+            fontSize:'0.4rem'
         }
-        return <div style={style1} onClick={()=>{this.setState({isShowAll:!this.state.isShowAll});this.props.foldOption(!this.state.isShowAll)}}>
+        return <div style={style1} onClick={() => {
+              this.setState({ isShowAll: !this.state.isShowAll });
+              this.props.foldOption(!this.state.isShowAll);
+            }}>
             <span style={style2}>{this.props.listTitle}</span>
-                <i className={`icon iconfont icon-packup`}  style={style3}/>
-            </div>;
+            <i className={`icon fa fa-angle-up`} style={style3} />
+          </div>;
     }
 }
 
