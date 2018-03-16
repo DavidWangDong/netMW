@@ -1,0 +1,17 @@
+.page-header,.page-header-inner{
+    height:100%;
+}
+.page-header-wrap{
+    display: flex;
+    font-size: 0.3rem;
+    align-items: center;
+    height: 100%;
+    color: #1ba40b;
+}
+.page-header-left-icon{
+        width: 10%;
+    color: #1ba40b;
+}
+.page-header-title{
+        width: 80%;
+}

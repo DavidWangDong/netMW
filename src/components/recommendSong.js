@@ -9,14 +9,15 @@ import ApiHost from "../config/apihost";
 function SingleSong (props) {
     const { name } = props.info;
     let author='';
-    props.info.song.artists.forEach((val,index)=>{
-        if (index==props.info.song.artists.length-1){
-          author += `${val.name}`;
-        }else{
-          author+=(`${val.name}/`)
-        }
-    })
-    const album=props.info.song.album.name
+    let song = props.info.song || props.info
+    song.artists.forEach((val, index) => {
+      if (index == song.artists.length - 1) {
+        author += `${val.name}`;
+      } else {
+        author += `${val.name}/`;
+      }
+    });
+    const album = song.album.name;
     return <div className="singleSong">
         <div className="songInfo">
           <p className="songName">{name}</p>
@@ -53,18 +54,21 @@ class RecommendSongList extends Component {
   constructor(props) {
     super(props);
     this.displayName = "recommend-song";
-    this.api = "/personalized/newsong";
+    this.api = this.props.api|| "/personalized/newsong";
+    this.listKey = this.props.listKey || "result";
     this.state={
       dataList:[]
     }
   }
 
   componentWillMount () {
-     fetch(`${ApiHost}${this.api}`)
+     fetch(`${ApiHost}${this.api}?r=${Date.now()}`, {
+       credentials: "include"
+     })
        .then(data => data.json())
        .then(json => {
          console.log(json);
-         this.setState({ dataList: json.result });
+         this.setState({ dataList: json[this.listKey] });
        });
   }
 

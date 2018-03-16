@@ -13,19 +13,8 @@ import MicroPlayer from "../../components/microPlayer.js";
 
 // layout 布局
 
-// 头部
-function  IndexHeader (props){
-   return <div style={{ width: "100%", height: "0.9rem" }}>
-            {props.children}
-          </div>;
-}
 
-// 内容部分
-function IndexBody (props) {
-  return <div style={{ width: "100%", top:'1rem',left:0,right:0,bottom:'1.24rem',overflowY:'auto',overflowX:'hidden',background:'#fff' }} className="pos_abs" >
-            {props.children}
-         </div>
-}
+import { IndexHeader, IndexFoot, IndexBody } from "../../layout/baseLay";
 
 
 // 每日推荐   音乐排行   我的歌单
@@ -64,20 +53,7 @@ function RecommendedList (props){
 } 
 
 
-// 小型播放器
-function IndexFoot(props) {
-  const style = {
-    height: "1.23rem",
-    background: "#fff",
-    bottom: 0,
-    width:'100%'
-  };
-  return (
-    <div className="pos_abs" style={style}>
-      {props.children}
-    </div>
-  );
-}
+
 
 
 class Index extends Component {

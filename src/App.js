@@ -30,10 +30,10 @@ class App extends Component {
 
 
   render() {
-    return <div className="App" style={{ height: window.innerHeight }}>
-        <Route path="/index" component={Index} />
-        <Route path="/dayRecommend" component={DayRecommend} />
-      </div>;
+    return  <div className="App" style={{ height: window.innerHeight }}>
+              <Route path="/index" component={Index} />
+              <Route path="/dayRecommend" component={DayRecommend} />
+            </div>;
   }
 }
 export default App;

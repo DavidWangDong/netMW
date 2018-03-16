@@ -22,7 +22,7 @@ class PageHeader extends Component{
         console.log(this.props.history)
         return <BaseLay displayName={this.displayName}>
             <div className="page-header-wrap">
-              <Link to={this.props.path ? this.props.path : this.props.history.goBack()} className="page-header-left-icon">
+              <Link to={this.props.path} className="page-header-left-icon">
                 <i className="fa fa-arrow-left" />
               </Link>
               <p className="page-header-title">{this.props.title}</p>
