@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { BrowserRouter as Router , Route, Link } from "react-router-dom";
 import Index from "./pages/index/index"
 import DayRecommend from "./pages/dayRecommend/index"
+import Modal from './components/modal'
 import './App.css'
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
 
   render() {
     return  <div className="App" style={{ height: window.innerHeight }}>
+              <Modal></Modal>
               <Route path="/index" component={Index} />
               <Route path="/dayRecommend" component={DayRecommend} />
             </div>;
