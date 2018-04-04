@@ -17,7 +17,7 @@ class LoginOption extends Component {
                 {this.state.options.map((val, index) => (
                   <li
                     className="login-item"
-                    onClick={val.handle}
+                    onClick={()=>{val.handle(val)}}
                     key={"login_op_" + index}
                   >
                     <i className={`icon fa ${val.icon}`} />

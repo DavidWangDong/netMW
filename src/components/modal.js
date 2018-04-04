@@ -67,8 +67,8 @@ class Modal extends Component {
     render () {
         const modalName = modalList[this.props.modalName]
         return <BaseLay displayName={this.displayName}>
-                {modalName}
-          </BaseLay>;
+                    {modalName}
+               </BaseLay>;
                
     }
     
