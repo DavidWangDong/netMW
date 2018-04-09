@@ -1,5 +1,5 @@
 const LOGIN = 'LOGIN';
-const LOGINOUT = "LOGINOUT";
+const LOGINEX = "LOGINEX";
 
 const initialState = {
   userId: "",
@@ -13,7 +13,7 @@ function login_reducer (previous = initialState, action) {
       let { userId, avatarUrl, nickname } = action.info;
       return Object.assign({}, previous, { userId, avatarUrl, nickname });
       break;
-    case LOGINOUT:
+    case LOGINEX:
       return Object.assign({}, initialState);
       break;
     default:

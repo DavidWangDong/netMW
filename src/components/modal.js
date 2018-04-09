@@ -1,58 +1,14 @@
-import React, { Component } from "react";
-import classnames from 'classnames';
+import React, { Component } from "react"
+import classnames from 'classnames'
 import BaseLay from '../layout/baseLay'
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import Validate from '../validate/index'
+import { connect } from "react-redux"
 import '../commonStyles/modal.css'
 
+import LoginModal from './modal_list/login_modal/index'
+import ToastModal from './modal_list/toast_modal/index'
 
-class LoginModal extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            info:[
-                {type:'text',placeholder:'请输入手机号',icon:'fa-mobile',isAct:false,value:''},
-                {type:'password',placeholder:'请输入密码',icon:'fa-lock',isAct:false,value:''}
-            ]
-        }
-    }
-    changeArrValue (val,index,value,key){
-        const arr = this.state.info.slice();
-        arr[index][key]=value;
-        this.setState({info:arr});
-    }
-    render (){
-        const style = {
-        }
-        const holders = {
-            username:'请输入手机号',
-            password:'请输入密码'
-        }
-        return <div className="login_modal" style={style}>
-            <div className="login_card pos_abs before">
-              <i className="fa fa-close pos_abs login_close" />
-              {this.state.info.map((val,index)=>{
-                  return <div className="form_wrap" key={`inputs_${index}`}>
-                      <i className={`fa ${val.icon}`} />
-                      <div className={`input pos_rel ${val.isAct?'act':''}`}>
-                        <input placeholder={val.placeholder} type={val.type} onFocus={()=>{
-                            this.changeArrValue(val,index,true,'isAct');
-                        }} onBlur={()=>{
-                            this.changeArrValue(val, index, false, "isAct");
-                        }}/>
-                        <span className="bottomLine pos_abs"></span>
-                      </div>
-                    </div>;
-              })}
-             
-              <button className="login_sub">登录</button>
-            </div>
-          </div>;
-    }
-    
-}
-
-const modalList = {
-  login: LoginModal
-};
 
 
 class Modal extends Component {
@@ -65,14 +21,37 @@ class Modal extends Component {
 
 
     render () {
-        const modalName = modalList[this.props.modalName]
+        let modalName = this.props.modal.modalName;
+        let  colModal = null;
+        if (this.props.modal.isShowModal){
+            switch (modalName) {
+                case "login":
+                colModal = <LoginModal />;
+                break;
+                default:
+                colModal = null;
+                break;
+            }
+        }
         return <BaseLay displayName={this.displayName}>
-                    {modalName}
-               </BaseLay>;
-               
+                     <ReactCSSTransitionGroup
+                        transitionName="zoomIn"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}
+                        >
+                         {colModal}
+                    </ReactCSSTransitionGroup>
+
+                    <ToastModal />
+                </BaseLay>;
+                    
     }
     
 }
 
+function mapStateToProps(state) {
+    return { modal: state.modal_reducer.modal };
+}
 
-export default Modal;
+
+export default connect(mapStateToProps)(Modal);

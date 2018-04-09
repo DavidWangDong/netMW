@@ -40,3 +40,27 @@ body{
 .pos_rel{
   position:relative;
 }
+
+.zoomIn-enter-active {
+  animation: zoomIn .25s ease;
+}
+
+.zoomIn-leave-active {
+  animation: zoomIn .25s ease reverse;
+}
+
+.zoomIn-leave {
+  opacity: 0;
+}
+
+.slideLeft-enter-active {
+  animation: slideInLeft .25s ease;
+}
+
+.slideLeft-leave-active {
+  animation: slideInLeft .25s ease reverse;
+}
+
+.slideLeft-leave {
+  opacity: 0;
+}

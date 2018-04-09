@@ -1,0 +1,36 @@
+.toast-modal{
+    position:fixed;
+    top:0;
+    z-index:9999;
+    width:100%;
+}
+.toastItem{
+    width:100%;
+    height:0.8rem;
+    margin-bottom:0.1rem;
+}
+.toastItem.success{
+    background:rgb(27, 164, 11);
+}
+.toastItem.error{
+    background:rgb(229, 82, 36);
+}
+.toastItem.wraning {
+    background: rgb(237, 188, 42);
+}
+.toastItemInner{
+    width: 90%;
+    margin:0 auto;
+    height:100%;
+    display:flex;
+    align-items: center;
+}
+.toastItemInner .fa{
+    font-size: 0.5rem;
+    color: #fff;
+}
+.toastItemInner .message{
+        font-size: 0.25rem;
+        color: #fff;
+        margin-left: 0.2rem;
+}

@@ -13,5 +13,4 @@ const root_reducer = combineReducers(reducer_list);
 
 const store = applyMiddleware(thunk,logger)(createStore)(root_reducer);
 
-
 export default store;
