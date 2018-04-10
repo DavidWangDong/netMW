@@ -29,7 +29,7 @@ class Toast extends Component {
   render() {
     const toasts = this.props.toastlist.map((val, index) => {
       const { type, msg } = val;
-      return val.isShow ? <ToastItem type={type} message={msg} /> : null;
+      return val.isShow ? <ToastItem type={type} message={msg} key={'toast_'+index} /> : null;
     });
     return <BaseLay displayName={this.displayName}>
             <ReactCSSTransitionGroup 

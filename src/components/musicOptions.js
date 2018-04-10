@@ -23,7 +23,7 @@ class MusicOpt extends Component {
     let specialIcon ='icon iconfont icon-rili' + (new Date().getDate());
 
 
-    this.state = { optsList: [{ name: "每日推荐", icon: specialIcon, path: "/index" }, { name: "音乐排行", icon: "fa fa-line-chart", path: "/index" }, { name: "我的歌单", icon: "fa fa-file-text", path: "/index" }] };
+    this.state = { optsList: [{ name: "每日推荐", icon: specialIcon, path: "/dayRecommend" }, { name: "音乐排行", icon: "fa fa-line-chart", path: "/orderList" }, { name: "我的歌单", icon: "fa fa-file-text", path: "/index" }] };
   }
 
   render() {

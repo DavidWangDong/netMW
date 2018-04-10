@@ -4,6 +4,7 @@ import BaseLay from "../layout/baseLay";
 import "../commonStyles/recommendSong.css";
 import "whatwg-fetch";
 import ApiHost from "../config/apihost";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 
 function SingleSong (props) {
@@ -73,13 +74,20 @@ class RecommendSongList extends Component {
   }
 
   render() {
+    const lists = this.state.dataList.map((val, index) => (
+      <SingleSong info={val} key={`recommend_single_song_` + index}>
+        <SongOption isShowDeleteOpt={this.props.isShowDeleteOpt} />
+      </SingleSong>
+    ));
     return <BaseLay displayName={this.displayName}>
         <div className="recommendSong">
-          {this.state.dataList.map((val, index) => (
-            <SingleSong info={val} key={`recommend_single_song_` + index}>
-              <SongOption isShowDeleteOpt={this.props.isShowDeleteOpt} />
-            </SingleSong>
-          ))}
+          <ReactCSSTransitionGroup
+                  transitionName="slideLeft"
+                  transitionEnterTimeout={500}
+                  transitionLeaveTimeout={500}
+                >
+          {lists}
+          </ReactCSSTransitionGroup>
         </div>
       </BaseLay>;
   }

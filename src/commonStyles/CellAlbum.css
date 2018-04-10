@@ -1,0 +1,35 @@
+.cell-album{
+    margin-top:0.4rem;
+}
+.cell-album-inner{
+    height:1rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cell_album_avatar{
+    width:1rem;
+    height:100%;
+}
+.cell_album_info{
+    width:60%;
+    text-align: left;
+}
+.cell_album_opt .fa{
+    font-size:0.35rem;
+    color:#1ba40b;
+}
+.album_title{
+        font-size: 0.25rem;
+        color:rgba(27,164,11,1);
+}
+.album_dsec{
+        font-size: 0.23rem;
+        color: #999;
+}
+.cell_album_opt{
+    width:14%;
+    justify-content: space-between;
+    display:flex;
+}

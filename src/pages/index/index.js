@@ -11,6 +11,7 @@ import RecommendSongList from "../../components/recommendSong.js";
 import MicroPlayer from "../../components/microPlayer.js";
 
 
+
 // layout 布局
 
 
@@ -63,6 +64,8 @@ class Index extends Component {
     this.rootPath = "/index"
   }
 
+
+
   render() {
     return <div className={`page page-${this.displayName} pos_rel`}>
         <IndexHeader>
@@ -99,5 +102,4 @@ class Index extends Component {
       </div>;
   }
 }
-
-export default Index;
+export default Index

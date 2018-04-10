@@ -64,3 +64,14 @@ body{
 .slideLeft-leave {
   opacity: 0;
 }
+.slideInRight-enter-active {
+  animation: slideInLeft .25s ease;
+}
+
+.slideInRight-leave-active {
+  animation: slideInLeft .25s ease reverse;
+}
+
+.slideInRight-leave {
+  opacity: 0;
+}
