@@ -1,0 +1,82 @@
+.pos_fix{
+    position:fixed;
+}
+.sheet-title{
+    width:100%;
+    top:0;
+    left:50%;
+    margin-left:-3.2rem;
+    height:0.78rem;
+}
+.sheet-inner{
+    width:95%;
+    height:100%;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+}
+.sheet-inner>span{
+    width:10%;
+}
+.sheet-inner .fa{
+    color:#fff;
+    font-size:0.3rem;
+}
+.sheet-name{
+    width: 80%;
+    height: 100%;
+    margin-left: 5%;
+    color: #fff;
+    font-size: 0.3rem;
+    line-height: 0.78rem;
+    text-align: left;
+}
+.sheet-detail{
+    height: 2rem;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 0.8rem;
+    display:flex;
+    justify-content: space-between;
+}
+.sheet-avatar{
+    width:2rem;
+    height:100%;
+}
+.sheet-desc{
+    height:100%;
+    width:60%;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align:left;
+    color:#fff;
+}
+.sheet-list-name{
+    font-size:0.25rem;
+}
+.sheet-author{
+    font-size:0.2rem;
+    color:#ddd;
+    margin-top:0.08rem;
+}
+.sheet-detail-hover{
+    width: 100%;
+    height: 0.35rem;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 0.22rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.sheet-play-count{
+    margin-right: 0.15rem;
+}
+.sheet-blur-background.pos_abs{
+    width:100%;
+    height: 100%;
+    z-index:-1;
+    filter:blur(89px);
+}

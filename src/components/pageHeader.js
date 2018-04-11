@@ -19,7 +19,6 @@ class PageHeader extends Component{
     }
 
     render (){
-        console.log(this.props.history)
         return <BaseLay displayName={this.displayName}>
             <div className="page-header-wrap">
               <Link to={this.props.path} className="page-header-left-icon">

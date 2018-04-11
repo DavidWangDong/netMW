@@ -4,6 +4,7 @@ import BaseLay from '../layout/baseLay'
 import '../commonStyles/recommendList.css'
 import "whatwg-fetch";
 import ApiHost from '../config/apihost'
+import {Link} from 'react-router-dom'
 
 
 
@@ -20,8 +21,8 @@ class SingleList extends Component {
     }
     render (){
         const {info} = this.props;
-        const {picUrl, playCount, name } = info;
-        return <div className="recommendItem">
+        const {picUrl, playCount, name,id } = info;
+        return <Link className="recommendItem" to={{ pathname: "/singleSheet", state: { fromDashboard: true, param: { picUrl, playCount: this.countFilter(playCount), name, id } } }}>
             <div className="recommend_avatar pos_rel animate">
               <img src={picUrl} />
               <p className="recommendInfo pos_abs">
@@ -31,7 +32,7 @@ class SingleList extends Component {
               </p>
             </div>
             <p className="recommend_title">{name}</p>
-          </div>;
+          </Link>;
     }
     
 }

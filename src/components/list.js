@@ -35,14 +35,17 @@ class ListHeader extends Component{
         }
         return <div style={style1} onClick={() => {
               this.setState({ isShowAll: !this.state.isShowAll });
-              this.props.foldOption(!this.state.isShowAll);
+              this.props.foldOption&&this.props.foldOption(!this.state.isShowAll);
             }}>
             <span style={style2}>{this.props.listTitle}</span>
-            <i className={`icon fa fa-angle-up`} style={style3} />
+
+            {this.props.foldOption ? <i className={`icon fa fa-angle-up`} style={style3} /> : null}
           </div>;
     }
 }
 
+
+export {ListHeader}
 
 
 

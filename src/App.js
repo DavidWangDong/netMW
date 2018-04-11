@@ -5,6 +5,8 @@ import { BrowserRouter as Router , Route, Link ,Redirect} from "react-router-dom
 import Index from "./pages/index/index"
 import DayRecommend from "./pages/dayRecommend/index"
 import OrderList from "./pages/orderList";
+import SongSheet from "./pages/songSheet";
+import SingleSheet from "./pages/singleSheet";
 
 import Modal from './components/modal'
 
@@ -39,6 +41,7 @@ class App extends Component {
   render() {
     return <div className="App" style={{ height: window.innerHeight }}>
         <Modal />
+        <Route exact path="/" render={()=><Redirect to='/index'/>}/>
         <Route path="/index" component={Index} />
         <Route path="/dayRecommend" render={props => {
             if (this.props.userInfo.userId) {
@@ -55,7 +58,23 @@ class App extends Component {
               return <Redirect to={{ pathname: "/index", state: { from: this.props.location } }} />;
             }
           }} />
-          <Route path="/orderList" component={OrderList} />
+        <Route path="/orderList" component={OrderList} />
+        <Route path="/songSheet" render={props => {
+            if (this.props.userInfo.userId) {
+              return <SongSheet />;
+            } else {
+              this.props.noLogin({
+                type: "ADD_TOAST",
+                info: {
+                  type: "error",
+                  msg: "尚未登录,请先登录",
+                  isShow: true
+                }
+              });
+              return <Redirect to={{ pathname: "/index", state: { from: this.props.location } }} />;
+            }
+          }} />
+        <Route path='/singleSheet' component={SingleSheet} />
       </div>;
   }
 }

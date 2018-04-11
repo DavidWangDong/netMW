@@ -36,10 +36,16 @@ class OrderTabList extends Component {
             ]
         }
         this.currIndex = 0;
+        this.mountFlag = null    
     }
 
     componentDidMount () {
         this.getListByIdx(this.currIndex);
+        this.mountFlag=true;
+    }
+
+    componentWillUnmount () {
+        this.mountFlag = false;
     }
 
     getListByIdx (idx){
@@ -48,17 +54,19 @@ class OrderTabList extends Component {
         })
           .then(data => {
                 const prom = data.json();
-                // window.$prom = prom;
                 return prom;
             })
           .then(json => {
+            if (!this.mountFlag){
+                return Promise.reject({msg:'已卸载,无需继续请求'})
+            }
             const { playlist } = json;
             const news = [...this.state.orderList]
             news.push(playlist);
             this.setState({ orderList: news });
             this.currIndex++;
             if (this.currIndex < this.state.indexs.length){
-                timeout(200).then(()=>this.getListByIdx(this.state.indexs[this.currIndex]));
+                timeout(50).then(()=>this.getListByIdx(this.state.indexs[this.currIndex]));
             }
             
           })
@@ -71,7 +79,7 @@ class OrderTabList extends Component {
         const cellAlbum_list = this.state.orderList.map(
           (val, index) => {
             const { coverImgUrl, name, trackCount } = val;
-            const rest = { title: name, avatar: coverImgUrl, detail: `共${trackCount}首`, isShowTrash: true };
+            const rest = { title: name, avatar: coverImgUrl, detail: `共${trackCount}首`, isShowTrash: false };
             return <CellAlbum {...rest} key={`order_index_${index}`} />;
           }
         );
