@@ -63,18 +63,21 @@ class RecommendSongList extends Component {
   }
 
   componentWillMount () {
+     if (this.props.getDataFlag){
+       return;
+     }
      fetch(`${ApiHost}${this.api}?r=${Date.now()}`, {
        credentials: "include"
      })
        .then(data => data.json())
        .then(json => {
-         console.log(json);
          this.setState({ dataList: json[this.listKey] });
        });
   }
 
   render() {
-    const lists = this.state.dataList.map((val, index) => (
+    const targetParam = this.props.getDataFlag?this.props.dataList:this.state.dataList;
+    const lists = targetParam.map((val, index) => (
       <SingleSong info={val} key={`recommend_single_song_` + index}>
         <SongOption isShowDeleteOpt={this.props.isShowDeleteOpt} />
       </SingleSong>

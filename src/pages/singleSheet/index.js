@@ -4,6 +4,8 @@ import classnames from 'classnames'
 import {IndexBody,IndexFoot} from '../../layout/baseLay'
 import MicroPlayer from "../../components/microPlayer";
 import '../../commonStyles/singleSheet.css'
+import ApiHost from '../../config/apihost'
+import SheetSongList from '../../components/recommendSong'
 
 function SheetHeader (props){
     const defau = {
@@ -19,6 +21,17 @@ function SheetHeader (props){
         <div className="sheet-blur-background pos_abs" style={blurBg} />
         {props.children}
       </div>;
+}
+
+function ListWrap (props) {
+    const defau = {
+        width:'90%',
+        margin:'0 auto'
+    }
+    const style = Object.assign({},defau,props.style)
+    return <div style={style}>
+        {props.children}
+    </div>
 }
 
 class SheetTitle extends Component{
@@ -65,7 +78,7 @@ class SheetDetail extends Component {
                 {this.props.name}
               </span>
               <span className="sheet-author">
-                by:街坊邻里
+                by:{this.props.author}
               </span>
             </div>
           </div>;
@@ -76,19 +89,38 @@ class SingleSheet extends Component {
     constructor(props) {
         super(props)
         this.displayName='single-sheet'
+        this.state={
+            song_sheet:{
+
+            },
+            currPage:0,
+            pageList:[]
+        }
+        this.api = "/playlist/detail";
     }
     componentDidMount () {
-        
+        fetch(`${ApiHost}${this.api}?id=${this.props.location.state.param.id}`, { credentials: "include" })
+        .then(data=>data.json())
+        .then(json=>{
+            this.setState({song_sheet:{...json.result}});
+            const list = [...json.result.tracks.slice(0, 20)];
+            this.setState({ pageList: list });
+        })
     }
+
+    
     render (){
         const rest = {...this.props.location.state.param};
-        console.log(this.props.location.param);
+        const author = this.state.song_sheet.creator?this.state.song_sheet.creator.nickname:'';
         return <div className={`page page-${this.displayName}`}>
             <IndexBody style={{ top: 0 }}>
               <SheetHeader {...rest}>
                 <SheetTitle />
-                <SheetDetail {...rest} />
+                <SheetDetail {...rest} author={author} />
               </SheetHeader>
+              <ListWrap style={{ marginTop: "0.2rem" }}>
+                <SheetSongList dataList={this.state.pageList} getDataFlag={true} />
+              </ListWrap>
             </IndexBody>
             <IndexFoot>
               <MicroPlayer />
