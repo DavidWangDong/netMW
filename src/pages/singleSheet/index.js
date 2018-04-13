@@ -15,11 +15,17 @@ function SheetHeader (props){
     }
     const bg ={ background: "rgb(0, 0, 0,0.2)" };
 
-    const style = Object.assign({}, defau, props.style, bg);
+    const style = Object.assign({}, defau, props.style);
+    const style1 = Object.assign({}, defau, props.style, {background:'#fff'});
+    const style2 = Object.assign({}, defau, props.style, bg);
      const blurBg = { background: `url(${props.picUrl}) no-repeat center top`, backgroundSize: "cover" };
-    return <div style={style} className="before pos_rel">
-        <div className="sheet-blur-background pos_abs" style={blurBg} />
-        {props.children}
+    return <div style={style} className="before pos_rel headPicerWrap">
+        <div style={style1} className={`headPicer before pos_rel ${props.isFix ? "fixHeader" : ""}`}>
+          <div style={style2} className="before pos_rel">
+            <div className="sheet-blur-background pos_abs" style={blurBg} />
+            {props.children}
+          </div>
+        </div>
       </div>;
 }
 
@@ -40,6 +46,7 @@ class SheetTitle extends Component{
     }
 
     render () {
+
         return <div className="sheet-title pos_fix">
             <div className="sheet-inner">
               <span onClick={()=>{this.props.history.goBack()}}>
@@ -62,8 +69,10 @@ class SheetDetail extends Component {
         super(props)
     }
     render () {
-       
-        return <div className="sheet-detail">
+       const style = {
+           opacity:this.props.opacity
+       }
+        return <div className="sheet-detail" style={style}>
             <div className="animate sheet-avatar pos_rel">
               <img src={this.props.picUrl} />
               <p className="sheet-detail-hover pos_abs">
@@ -94,9 +103,12 @@ class SingleSheet extends Component {
 
             },
             currPage:0,
-            pageList:[]
+            pageList:[],
+            isFix:false,
+            opacity:1
         }
         this.api = "/playlist/detail";
+        this.scrollDom = null;
     }
     componentDidMount () {
         fetch(`${ApiHost}${this.api}?id=${this.props.location.state.param.id}`, { credentials: "include" })
@@ -106,17 +118,49 @@ class SingleSheet extends Component {
             const list = [...json.result.tracks.slice(0, 20)];
             this.setState({ pageList: list });
         })
+        this.scrollDom = this.scrollDom.querySelector('div:first-child')
+        const self = this;
+
+        const maxBot = this.scrollDom.querySelector(".headPicerWrap").getBoundingClientRect().bottom;
+        this.scrollDom.addEventListener('scroll',function (e){
+            // 检查滚动头部动作
+            const titleArea = this.querySelector(".sheet-title");
+            const headPicer = this.querySelector(".headPicerWrap");
+            const pt = titleArea.getBoundingClientRect();
+            const ph = headPicer.getBoundingClientRect();
+
+            if (ph.bottom-pt.bottom<10){
+                !self.state.isFix && self.setState({
+                    isFix: true
+                  });
+            }else{
+                
+                 self.setState({
+                    isFix: false
+                  });
+            }
+            let MaxDis = maxBot - pt.bottom;
+            let dis = ph.bottom - pt.bottom;
+            let op = (dis / MaxDis).toFixed(1);
+            self.setState({ opacity: op<0?0:op });
+            // 检查是否滚动到底部
+            
+
+
+        })
     }
 
     
     render (){
         const rest = {...this.props.location.state.param};
         const author = this.state.song_sheet.creator?this.state.song_sheet.creator.nickname:'';
-        return <div className={`page page-${this.displayName}`}>
+        return <div className={`page page-${this.displayName}`} ref={(dom)=>{
+            this.scrollDom = dom;
+        }}>
             <IndexBody style={{ top: 0 }}>
-              <SheetHeader {...rest}>
-                <SheetTitle />
-                <SheetDetail {...rest} author={author} />
+              <SheetHeader {...rest} isFix={this.state.isFix}>
+                <SheetTitle {...rest} />
+                <SheetDetail {...rest} author={author} opacity={this.state.opacity} />
               </SheetHeader>
               <ListWrap style={{ marginTop: "0.2rem" }}>
                 <SheetSongList dataList={this.state.pageList} getDataFlag={true} />
