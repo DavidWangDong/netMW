@@ -96,3 +96,23 @@
     position:fixed;
     top:-2.6rem;
 }
+.sheet-name>p{
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:2;
+}
+.sheet-name-lunbo{
+    width:100%;
+    height:100%;
+    opacity:0;
+    overflow: hidden;
+}
+.sheet-name-lunbo-inner{
+    height: 100%;
+}
+.sheet-name-lunbo-inner p{
+    height:100%;
+    float:left;
+    white-space:nowrap;
+}

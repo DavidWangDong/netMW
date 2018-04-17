@@ -20,7 +20,7 @@ function SheetHeader (props){
     const style2 = Object.assign({}, defau, props.style, bg);
      const blurBg = { background: `url(${props.picUrl}) no-repeat center top`, backgroundSize: "cover" };
     return <div style={style} className="before pos_rel headPicerWrap">
-        <div style={style1} className={`headPicer before pos_rel ${props.isFix ? "fixHeader" : ""}`}>
+        <div style={style1} className={`headPicer before pos_rel`}>
           <div style={style2} className="before pos_rel">
             <div className="sheet-blur-background pos_abs" style={blurBg} />
             {props.children}
@@ -43,7 +43,38 @@ function ListWrap (props) {
 class SheetTitle extends Component{
     constructor(props) {
         super(props)
+        this.scrollDom = null;
+        this.state = {
+            wrapStyle:{
+                width:'700%',
+            }
+        }
+        this.shouldScroll = false;
     }
+
+    
+    componentDidMount () {
+        // 计算宽度
+        const offsetWidth = parseInt(this.scrollDom.offsetWidth);
+        const currWidth = parseInt(this.scrollDom.querySelector(".sheet-name-lunbo-inner p").offsetWidth);
+        this.scrollDom.querySelectorAll(".sheet-name-lunbo-inner p").forEach((val)=>{
+            val.style.width="50%"
+        })
+        let wrapWidth;
+        console.log(currWidth,offsetWidth)
+        if (currWidth > offsetWidth) {
+            wrapWidth = currWidth*2.2;
+            this.shouldScroll=true;
+
+        }else{
+            wrapWidth = currWidth*2
+            this.shouldScroll = false;
+        }
+
+        this.setState({wrapStyle:{width:wrapWidth+'px'}})
+    }
+
+    
 
     render () {
 
@@ -52,8 +83,16 @@ class SheetTitle extends Component{
               <span onClick={()=>{this.props.history.goBack()}}>
                 <i className="fa fa-arrow-left" />
               </span>
-              <div className="sheet-name">
-                {this.props.title ? this.props.title : "歌单"}
+              <div className="sheet-name pos_rel">
+                
+                    <p>歌单</p>
+                    <div className="sheet-name-lunbo" ref={(dom)=>{this.scrollDom=dom}}>
+                        <div className="sheet-name-lunbo-inner" style={this.state.wrapStyle}>
+                            <p>{this.props.name}</p>
+                            <p>{this.props.name}</p>
+                        </div>
+                    </div>
+                
               </div>
             </div>
           </div>;
@@ -105,7 +144,8 @@ class SingleSheet extends Component {
             currPage:0,
             pageList:[],
             isFix:false,
-            opacity:1
+            opacity:1,
+            textLunBo:0
         }
         this.api = "/playlist/detail";
         this.scrollDom = null;
@@ -121,28 +161,50 @@ class SingleSheet extends Component {
         this.scrollDom = this.scrollDom.querySelector('div:first-child')
         const self = this;
 
+
+        const titleArea = this.scrollDom.querySelector(".sheet-title");
+        const headPicer = this.scrollDom.querySelector(".headPicerWrap");
+        const headPicerItem = this.scrollDom.querySelector(".headPicer");
+        const detail = this.scrollDom.querySelector(".sheet-detail");
+        const sheetAvatar = this.scrollDom.querySelector(".sheet-avatar").getBoundingClientRect();
+        const name_p = this.scrollDom.querySelector(".sheet-name p");
+        const name_lunbo = this.scrollDom.querySelector(".sheet-name-lunbo");
+        const pt = titleArea.getBoundingClientRect();
+        const ph = headPicer.getBoundingClientRect();
         const maxBot = this.scrollDom.querySelector(".headPicerWrap").getBoundingClientRect().bottom;
         this.scrollDom.addEventListener('scroll',function (e){
             // 检查滚动头部动作
-            const titleArea = this.querySelector(".sheet-title");
-            const headPicer = this.querySelector(".headPicerWrap");
-            const pt = titleArea.getBoundingClientRect();
-            const ph = headPicer.getBoundingClientRect();
-
-            if (ph.bottom-pt.bottom<10){
-                !self.state.isFix && self.setState({
-                    isFix: true
-                  });
+            if (sheetAvatar.top<0){
+                name_p.style.opacity = 0;
+                name_lunbo.style.opacity = 1;
             }else{
-                
-                 self.setState({
-                    isFix: false
-                  });
+                name_p.style.opacity = 1;
+                name_lunbo.style.opacity = 0;
             }
+            console.log(ph.bottom - pt.bottom);
+            if (ph.bottom-pt.bottom<10){
+                 
+                if (headPicerItem.style.position != "fixed"){
+                    headPicerItem.style.position = "fixed"
+                    headPicerItem.style.top = "-2.6rem"
+                }
+                !self.timerId && (self.timerId=setInterval(()=>{
+                    
+                },1000/60))
+            }else{
+                if (headPicerItem.style.position == "fixed" ){
+                    headPicerItem.style.position = "relative"
+                    headPicerItem.style.top = "0"
+                }
+                
+            }
+            
+
             let MaxDis = maxBot - pt.bottom;
             let dis = ph.bottom - pt.bottom;
             let op = (dis / MaxDis).toFixed(1);
-            self.setState({ opacity: op<0?0:op });
+            detail.style.opacity = op < 0 ? 0 : op;
+            // self.setState({ opacity: op<0?0:op });
             // 检查是否滚动到底部
             
 
@@ -154,12 +216,12 @@ class SingleSheet extends Component {
     render (){
         const rest = {...this.props.location.state.param};
         const author = this.state.song_sheet.creator?this.state.song_sheet.creator.nickname:'';
-        return <div className={`page page-${this.displayName}`} ref={(dom)=>{
-            this.scrollDom = dom;
-        }}>
+        return <div className={`page page-${this.displayName}`} ref={dom => {
+              this.scrollDom = dom;
+            }}>
             <IndexBody style={{ top: 0 }}>
-              <SheetHeader {...rest} isFix={this.state.isFix}>
-                <SheetTitle {...rest} />
+              <SheetHeader {...rest}>
+                <SheetTitle {...rest} textLunBo={this.state.textLunBo} />
                 <SheetDetail {...rest} author={author} opacity={this.state.opacity} />
               </SheetHeader>
               <ListWrap style={{ marginTop: "0.2rem" }}>
