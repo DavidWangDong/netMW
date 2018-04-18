@@ -80,7 +80,7 @@ class OrderTabList extends Component {
           (val, index) => {
             const { coverImgUrl, name, trackCount } = val;
             const rest = { title: name, avatar: coverImgUrl, detail: `共${trackCount}首`, isShowTrash: false };
-            return <CellAlbum {...rest} key={`order_index_${index}`} />;
+            return <CellAlbum {...rest} key={`order_index_${index}`} info={val}/>;
           }
         );
         return <BaseLay displayName={this.displayName}>

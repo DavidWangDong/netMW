@@ -82,11 +82,11 @@ class SongSheet extends Component {
         const ownLists = this.state.ownList.map((val,index) =>{
             const rest = { avatar: val.coverImgUrl, title: val.name, detail: `${val.trackCount}首`,isShowTrash:false };
             
-            return <CellAlbum {...rest} key={`own_sheet_${index}`}/>});
+            return <CellAlbum {...rest} key={`own_sheet_${index}`} info={val}/>});
         const collectonLists = this.state.collectionList.map((val,index)=>{
             const rest = { avatar: val.coverImgUrl, title: val.name, detail: `${val.trackCount}首`, isShowTrash: false };
 
-            return <CellAlbum {...rest} key={`collection_sheet_${index}`} />;
+            return <CellAlbum {...rest} key={`collection_sheet_${index}`} info={val} />;
         })
         return <div className={`page page-${this.displayName}`}>
             <IndexHeader style={{ background: "#fff", height: "0.78rem" }}>

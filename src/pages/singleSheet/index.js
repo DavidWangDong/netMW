@@ -57,21 +57,37 @@ class SheetTitle extends Component{
         // 计算宽度
         const offsetWidth = parseInt(this.scrollDom.offsetWidth);
         const currWidth = parseInt(this.scrollDom.querySelector(".sheet-name-lunbo-inner p").offsetWidth);
+        const wrapDom = this.scrollDom.querySelector(".sheet-name-lunbo-inner")
         this.scrollDom.querySelectorAll(".sheet-name-lunbo-inner p").forEach((val)=>{
             val.style.width="50%"
         })
         let wrapWidth;
-        console.log(currWidth,offsetWidth)
         if (currWidth > offsetWidth) {
             wrapWidth = currWidth*2.2;
             this.shouldScroll=true;
-
         }else{
-            wrapWidth = currWidth*2
+            wrapWidth = offsetWidth * 2
             this.shouldScroll = false;
         }
-
         this.setState({wrapStyle:{width:wrapWidth+'px'}})
+        if (this.shouldScroll){
+            const limitWidth = wrapWidth*0.5;
+            let count=0;
+            !this.timerId&&(this.timerId=setInterval(()=>{
+                if (!this.props.startLunbo){
+                    count=0;
+                    wrapDom.style.transform = `translate(-${count}px)`
+                    return;
+                }
+                wrapDom.style.transform=`translate(-${++count}px)`
+                if (count>=limitWidth){
+                    let delDom = wrapDom.removeChild(wrapDom.firstChild)
+                    wrapDom.appendChild(delDom);
+                    count=0;
+                }
+            },1000/60))
+
+        }
     }
 
     
@@ -141,12 +157,14 @@ class SingleSheet extends Component {
             song_sheet:{
 
             },
-            currPage:0,
             pageList:[],
             isFix:false,
             opacity:1,
-            textLunBo:0
+            textLunBo:0,
+            startLunbo:false,
+            isLoad:false
         }
+        this.currPage=1
         this.api = "/playlist/detail";
         this.scrollDom = null;
     }
@@ -155,7 +173,7 @@ class SingleSheet extends Component {
         .then(data=>data.json())
         .then(json=>{
             this.setState({song_sheet:{...json.result}});
-            const list = [...json.result.tracks.slice(0, 20)];
+            const list = [...json.result.tracks.slice(0)];
             this.setState({ pageList: list });
         })
         this.scrollDom = this.scrollDom.querySelector('div:first-child')
@@ -166,14 +184,17 @@ class SingleSheet extends Component {
         const headPicer = this.scrollDom.querySelector(".headPicerWrap");
         const headPicerItem = this.scrollDom.querySelector(".headPicer");
         const detail = this.scrollDom.querySelector(".sheet-detail");
-        const sheetAvatar = this.scrollDom.querySelector(".sheet-avatar").getBoundingClientRect();
+        
         const name_p = this.scrollDom.querySelector(".sheet-name p");
         const name_lunbo = this.scrollDom.querySelector(".sheet-name-lunbo");
-        const pt = titleArea.getBoundingClientRect();
-        const ph = headPicer.getBoundingClientRect();
-        const maxBot = this.scrollDom.querySelector(".headPicerWrap").getBoundingClientRect().bottom;
+        const maxBot = self.scrollDom.querySelector(".headPicerWrap").getBoundingClientRect().bottom;
+        
         this.scrollDom.addEventListener('scroll',function (e){
             // 检查滚动头部动作
+            const pt = titleArea.getBoundingClientRect();
+            const ph = headPicer.getBoundingClientRect();
+            
+            const sheetAvatar = self.scrollDom.querySelector(".sheet-avatar").getBoundingClientRect();
             if (sheetAvatar.top<0){
                 name_p.style.opacity = 0;
                 name_lunbo.style.opacity = 1;
@@ -181,21 +202,19 @@ class SingleSheet extends Component {
                 name_p.style.opacity = 1;
                 name_lunbo.style.opacity = 0;
             }
-            console.log(ph.bottom - pt.bottom);
             if (ph.bottom-pt.bottom<10){
                  
                 if (headPicerItem.style.position != "fixed"){
                     headPicerItem.style.position = "fixed"
                     headPicerItem.style.top = "-2.6rem"
                 }
-                !self.timerId && (self.timerId=setInterval(()=>{
-                    
-                },1000/60))
+                self.setState({startLunbo:true});
             }else{
                 if (headPicerItem.style.position == "fixed" ){
                     headPicerItem.style.position = "relative"
                     headPicerItem.style.top = "0"
                 }
+                self.setState({startLunbo:false});
                 
             }
             
@@ -204,10 +223,21 @@ class SingleSheet extends Component {
             let dis = ph.bottom - pt.bottom;
             let op = (dis / MaxDis).toFixed(1);
             detail.style.opacity = op < 0 ? 0 : op;
-            // self.setState({ opacity: op<0?0:op });
             // 检查是否滚动到底部
-            
-
+            // if (this.scrollHeight==(this.scrollTop+this.offsetHeight)){
+            //     const MaxPage = Math.ceil (self.state.song_sheet.tracks.length / 20);
+            //     if (self.currPage>=MaxPage) {
+            //         return;
+            //     }
+            //     self.setState({isLoad:true});
+            //     this.scrollTop = this.scrollHeight - this.offsetHeight;
+            //     self.currPage++;
+            //     let list = self.state.song_sheet.tracks.slice((self.currPage - 1) * 20, self.currPage*20)
+            //     setTimeout(() => {
+            //         self.setState({pageList:[...self.state.pageList,...list]})
+            //         self.setState({isLoad:false});
+            //     }, 200);
+            // }
 
         })
     }
@@ -221,12 +251,15 @@ class SingleSheet extends Component {
             }}>
             <IndexBody style={{ top: 0 }}>
               <SheetHeader {...rest}>
-                <SheetTitle {...rest} textLunBo={this.state.textLunBo} />
-                <SheetDetail {...rest} author={author} opacity={this.state.opacity} />
+                <SheetTitle {...rest} startLunbo={this.state.startLunbo} />
+                <SheetDetail {...rest} author={author} />
               </SheetHeader>
               <ListWrap style={{ marginTop: "0.2rem" }}>
                 <SheetSongList dataList={this.state.pageList} getDataFlag={true} />
               </ListWrap>
+              <div className="loading-icon-wrap">
+                {this.state.isLoad?(<div className="loading-icon"></div>):''}
+              </div>
             </IndexBody>
             <IndexFoot>
               <MicroPlayer />
