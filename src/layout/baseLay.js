@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../commonStyles/indexBody.css'
 
 class BaseLay extends Component {
     constructor(props) {
@@ -20,17 +21,19 @@ class BaseLay extends Component {
 // 头部
 function  IndexHeader (props){
    
-  const defau = { width: "100%", height: "0.9rem" };
+  const defau = { width: "100%", height: "0.9rem",left:0,top:0,borderBottom:'3px solid #eee' };
   const style = Object.assign({}, defau, props.style);
-   return <div style={style}>{props.children}</div>;
+   return <div style={style} className="pos_fix">
+       {props.children}
+     </div>;
 }
 
 // 内容部分
 function IndexBody (props) {
-  const defau = { width: "100%", top: "1rem", left: 0, right: 0, bottom: "1.24rem", overflowY: "auto", overflowX: "hidden", background: "#fff" };
+  const defau = { width: "100%", paddingTop: "1rem",paddingBottom:'1.23rem'};
   const style = Object.assign({}, defau, props.style);
-  return <div style={style} className="pos_abs">
-      {props.children}
+  return <div style={style} className="IndexBody">
+      <div style={{background:'#fff'}}>{props.children}</div>
     </div>;
 }
 
@@ -45,7 +48,7 @@ function IndexFoot(props) {
   };
   const style = Object.assign({}, defau, props.style);
   return (
-    <div className="pos_abs" style={style}>
+    <div className="pos_fix" style={style}>
       {props.children}
     </div>
   );

@@ -21,7 +21,10 @@ a{
 }
 .page{
   width:100%;
-  height:100%;
+}
+.page:before{
+  content:'';
+  display:block;
 }
 .before:before{
   content:'';
@@ -30,7 +33,7 @@ a{
 body{
   overflow-x: hidden;
   overflow-y: auto;
-  background:#eee;
+  /* background:#eee; */
   font-size: 0.14rem;
 }
 .animate img{
@@ -89,4 +92,8 @@ body{
 
 .fadeIn-leave {
   opacity: 0;
+}
+.pos_fix{
+  position:fixed;
+  z-index: 100;
 }

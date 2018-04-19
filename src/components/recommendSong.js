@@ -4,11 +4,13 @@ import BaseLay from "../layout/baseLay";
 import "../commonStyles/recommendSong.css";
 import "whatwg-fetch";
 import ApiHost from "../config/apihost";
+import {connect} from 'react-redux'
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import actions from '../actions/index'
 
 
 function SingleSong (props) {
-    const { name } = props.info;
+    const { name,id } = props.info;
     let author='';
     let song = props.info.song || props.info
     song.artists.forEach((val, index) => {
@@ -19,9 +21,9 @@ function SingleSong (props) {
       }
     });
     const album = song.album.name;
-    return <div className="singleSong">
+    return <div className="singleSong" onClick={()=>{props.playSong()}}>
         <div className="songInfo">
-          <p className="songName">{name}</p>
+          <p className={`songName ${id==props.songInfo.id?'isPlaying':''}`}>{name}</p>
           <p className="songAuthor">
             {author}-{album}
           </p>
@@ -30,6 +32,18 @@ function SingleSong (props) {
       </div>;
 }
 
+function mapStateToProps(state){
+  return {songInfo:state.player_reducer.curr_info}
+}
+
+function mapDispatchToProps(dispatch,ownProps){
+    return {playSong:(args)=>{
+        const info = ownProps.info;
+        dispatch(actions.play_music(info));
+    }}
+}
+
+SingleSong = connect(mapStateToProps, mapDispatchToProps)(SingleSong);
 
 
 class SongOption extends Component{

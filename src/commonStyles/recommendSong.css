@@ -30,3 +30,7 @@
 .songAuthor{
     color:#999;
 }
+
+p.songName.isPlaying {
+    color: #f12014;
+}

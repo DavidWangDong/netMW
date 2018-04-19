@@ -17,18 +17,18 @@ class CellAlbum extends Component{
     }
     render () {
         const { info } = this.props;
-        const { picUrl, playCount, name, id } = info;
+        const { picUrl, playCount, name, id, coverImgUrl } = info;
         
         return <BaseLay displayName={this.displayName}>
-            <Link className="clee_album_link" to={{ pathname: "/singleSheet", state: { fromDashboard: true, param: { picUrl, playCount: this.countFilter(playCount), name, id } } }}>
-                <div className="cell_album_avatar animate">
+            <Link className="clee_album_link" to={{ pathname: "/singleSheet", state: { fromDashboard: true, param: { picUrl: picUrl || coverImgUrl, playCount: this.countFilter(playCount), name, id } } }}>
+              <div className="cell_album_avatar animate">
                 <img src={this.props.avatar} />
-                </div>
-                <div className="cell_album_info">
+              </div>
+              <div className="cell_album_info">
                 <span className="album_title">{this.props.title}</span>
                 <br />
                 <span className="album_dsec">{this.props.detail}</span>
-                </div>
+              </div>
             </Link>
             <div className="cell_album_opt">
               <i className="fa fa-play" />

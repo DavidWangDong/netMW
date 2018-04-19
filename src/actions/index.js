@@ -19,7 +19,6 @@ const actions = {
     return function(dispatch, getState) {
       fetch(`${ApiHost}${args["url"]}`)
         .then(data => {
-          console.log(data);
           if (!data.ok){
             return data.json().then(json => Promise.reject(json));
           }
@@ -87,7 +86,42 @@ const actions = {
            });
         });
     }
+  },
+  play_music(args){
+    return function (dispatch,getState){
+        const {id} = args;
+        const {curr_info,audio}=getState().player_reducer;
+        if (id===curr_info.id){
+          audio.pause();
+          audio.currentTime=0;
+          audio.play();
+        }else{
+          dispatch({
+            type: "CHG_STATUS",
+            info: { status: "LOADING",curr_info:args.song||args }
+          });
+          fetch(`${ApiHost}/music/url?id=${id}`)
+          .then(data=>data.json())
+          .then(json=>{
+            console.log(json);
+            if (json.data&&json.data.length>=1){
+              audio.src=json.data[0].url;
+              return new Promise((resolve,reject)=>{
+                audio.addEventListener("canplaythrough",()=>{
+                  resolve()
+                });
+              })
+            }
+          })
+          .then(()=>{
+            audio.play();
+            dispatch({type:'CHG_STATUS',info:{status:'PLAYING'}})
+            
+          })
+         
+        }
+    }
+    
   }
 };
-
 export default actions;
