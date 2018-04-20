@@ -108,9 +108,9 @@ class SongSheet extends Component {
                 </SingleSheetContain>
               </SheetListWrap>
             </IndexBody>
-            <IndexFoot>
+            {/* <IndexFoot>
               <MicroPlayer />
-            </IndexFoot>
+            </IndexFoot> */}
           </div>;
     }
     

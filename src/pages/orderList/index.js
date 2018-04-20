@@ -21,9 +21,9 @@ class OrderList extends Component{
                     <IndexBody style={{top:'0.8rem'}}>
                         <OrderTabList></OrderTabList>
                     </IndexBody>
-                    <IndexFoot>
+                    {/* <IndexFoot>
                         <MicroPlayer></MicroPlayer>
-                    </IndexFoot>
+                    </IndexFoot> */}
                </div>
     }
     

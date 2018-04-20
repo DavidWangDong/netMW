@@ -288,15 +288,12 @@ class SingleSheet extends Component {
             <SheetDetail {...rest} author={author} />
           </SheetHeader>
           <ListWrap style={{ marginTop: "0.2rem" }}>
-            <SheetSongList dataList={this.state.pageList} getDataFlag={true} />
+            <SheetSongList dataList={this.state.pageList} getDataFlag={true} iconShow={{play:false,heart:true,plus:true}} />
           </ListWrap>
           <div className="loading-icon-wrap">
             {this.state.isLoad ? <div className="loading-icon" /> : ""}
           </div>
         </IndexBody>
-        <IndexFoot>
-          <MicroPlayer />
-        </IndexFoot>
       </div>
     );
   }

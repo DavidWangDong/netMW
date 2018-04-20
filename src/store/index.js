@@ -4,10 +4,12 @@ import logger from 'redux-logger'
 import login_reducer from '../reducers/reducer_login'
 import modal_reducer from "../reducers/redeucer_modal";
 import player_reducer from "../reducers/reducer_player";
+import playlist_reducer from "../reducers/reducer_playlist";
 const reducer_list = {
   login_reducer,
   modal_reducer,
-  player_reducer
+  player_reducer,
+  playlist_reducer
 };
 
 const root_reducer = combineReducers(reducer_list);

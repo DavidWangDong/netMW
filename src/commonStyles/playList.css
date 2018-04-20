@@ -1,0 +1,43 @@
+.component-playList{
+    width:100%;
+    bottom:1.23rem;
+    touch-action: none;
+}
+.playlist-hover{
+    background:rgba(0,0,0,0.5);
+    overflow:hidden;
+    z-index:4;
+    bottom:0;
+    width:100%;
+}
+.playlist-inner{
+    bottom:0;
+    width:100%;
+    height: 5.24rem;
+    background:#fff;
+    touch-action: none;
+    z-index:5;
+}
+.playlist-header{
+        height: 0.55rem;
+        display: flex;
+        padding: 0 0.2rem;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.25rem;
+        border-bottom: 1px solid #ddd;
+}
+.opt-collect,.opt-clear{
+    color: #777;
+}
+.opt-count{
+    color:#1ba40b;
+}
+.playlist-wrap{
+    width:95%;
+    margin:0 auto;
+    margin-top:0.1rem;
+    max-height:4.68rem;
+    overflow-y: auto;
+
+}

@@ -7,6 +7,8 @@ import DayRecommend from "./pages/dayRecommend/index"
 import OrderList from "./pages/orderList";
 import SongSheet from "./pages/songSheet";
 import SingleSheet from "./pages/singleSheet";
+import MicroPlayer from "./components/microPlayer.js";
+import { IndexFoot } from "./layout/baseLay";
 
 import Modal from './components/modal'
 
@@ -41,7 +43,7 @@ class App extends Component {
   render() {
     return <div className="App" style={{ height: window.innerHeight }}>
         <Modal />
-        <Route exact path="/" render={()=><Redirect to='/index'/>}/>
+        <Route exact path="/" render={() => <Redirect to="/index" />} />
         <Route path="/index" component={Index} />
         <Route path="/dayRecommend" render={props => {
             if (this.props.userInfo.userId) {
@@ -74,7 +76,10 @@ class App extends Component {
               return <Redirect to={{ pathname: "/index", state: { from: this.props.location } }} />;
             }
           }} />
-        <Route path='/singleSheet' component={SingleSheet} />
+        <Route path="/singleSheet" component={SingleSheet} />
+        <IndexFoot>
+          <MicroPlayer />
+        </IndexFoot>
       </div>;
   }
 }

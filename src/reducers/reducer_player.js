@@ -34,11 +34,11 @@ const audio = new Audio;
 audio.loop=false;
 
 const initialState = {
-  status: "PLAYING",
-  model: "",
+  status: "",
+  model: "RANDOM_PLAY_CIRCLE",
   curr_info: {},
-  audio:audio,
-  duration:0
+  audio: audio,
+  duration: 0
 };
 
 function player_reducer(previous=initialState,action){

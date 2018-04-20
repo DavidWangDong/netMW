@@ -88,16 +88,16 @@ class Index extends Component {
           <RecommendedList style={{ marginTop: "0.1rem" }}>
             <List listTitle="最新音乐" minHeight="2.2rem">
               <div style={{ marginTop: "0.2rem" }}>
-                <RecommendSongList isShowDeleteOpt={false} />
+                <RecommendSongList iconShow={{ play: false, heart: true, plus: true }} />
               </div>
             </List>
           </RecommendedList>
         </IndexBody>
-        <IndexFoot>
+        {/* <IndexFoot>
             <MicroPlayer>
               
             </MicroPlayer>
-        </IndexFoot>
+        </IndexFoot> */}
         <Route path={`${this.rootPath}/playList`} component={PlayList} />
       </div>;
   }

@@ -20,7 +20,7 @@
 .optList{
     width: 22%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .optList .icon{
     align-self: center;

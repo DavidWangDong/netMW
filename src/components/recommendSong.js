@@ -21,8 +21,8 @@ function SingleSong (props) {
       }
     });
     const album = song.album.name;
-    return <div className="singleSong" onClick={()=>{props.playSong()}}>
-        <div className="songInfo">
+    return <div className="singleSong">
+        <div className="songInfo" onClick={()=>{props.playSong(song)}}>
           <p className={`songName ${id==props.songInfo.id?'isPlaying':''}`}>{name}</p>
           <p className="songAuthor">
             {author}-{album}
@@ -37,10 +37,18 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch,ownProps){
+    const info = ownProps.info;
     return {playSong:(args)=>{
-        const info = ownProps.info;
-        dispatch(actions.play_music(info));
-    }}
+        dispatch(actions.play_music(info, ownProps.clickIgnore));
+    },
+    addSongToList:(args)=>{
+      dispatch(actions.addSongToList(info))
+    },
+    deleteSong:()=>{
+      dispatch(actions.deleteSong(info));
+    }
+  
+  }
 }
 
 SingleSong = connect(mapStateToProps, mapDispatchToProps)(SingleSong);
@@ -55,13 +63,15 @@ class SongOption extends Component{
   render () {
 
     return <div className="optList">
-        <i className="icon fa fa-play" />
-        <i className="icon fa fa-heart-o" />
-        <i className="icon fa fa-plus" />
-        {this.props.isShowDeleteOpt ? <i className="icon fa fa-times" /> : null}
+        {this.props.iconShow.play?(<i className="icon fa fa-play" />):null}
+        {this.props.iconShow.heart?(<i className="icon fa fa-heart-o" />):null}
+        {this.props.iconShow.plus?(<i className="icon fa fa-plus" onClick={()=>{this.props.addSongToList()}} />):null}
+        {this.props.iconShow.times ? <i className="icon fa fa-times" onClick={()=>{this.props.deleteSong()}} /> : null}
       </div>;
   }
 }
+
+SongOption = connect(mapStateToProps, mapDispatchToProps)(SongOption);
 
 
 
@@ -92,8 +102,8 @@ class RecommendSongList extends Component {
   render() {
     const targetParam = this.props.getDataFlag?this.props.dataList:this.state.dataList;
     const lists = targetParam.map((val, index) => (
-      <SingleSong info={val} key={`recommend_single_song_` + index}>
-        <SongOption isShowDeleteOpt={this.props.isShowDeleteOpt} />
+      <SingleSong info={val} key={`recommend_single_song_` + index} clickIgnore={this.props.clickIgnore}>
+        <SongOption iconShow={this.props.iconShow} info={val} />
       </SingleSong>
     ));
     return <BaseLay displayName={this.displayName}>

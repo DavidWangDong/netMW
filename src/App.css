@@ -93,6 +93,22 @@ body{
 .fadeIn-leave {
   opacity: 0;
 }
+
+
+
+.slideInUp-enter-active {
+  animation: slideInUp .25s ease;
+}
+
+.slideInUp-leave-active {
+  animation: slideInUp .25s ease reverse;
+}
+
+.slideInUp-leave {
+  opacity: 0;
+}
+
+
 .pos_fix{
   position:fixed;
   z-index: 100;

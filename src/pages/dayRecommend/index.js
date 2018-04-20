@@ -79,12 +79,12 @@ class DayRecommend extends Component{
                 </HeaderPic>
               </HeaderWrap>
               <ListWrap>
-                <RecommendSongList api="/recommend/songs" listKey="recommend" />
+                <RecommendSongList api="/recommend/songs" listKey="recommend" iconShow={{play:false,heart:true,plus:true}} />
               </ListWrap>
             </IndexBody>
-            <IndexFoot>
+            {/* <IndexFoot>
               <MicroPlayer />
-            </IndexFoot>
+            </IndexFoot> */}
           </div>;  
     }
     
