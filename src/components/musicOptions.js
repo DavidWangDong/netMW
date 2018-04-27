@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import BaseLay from '../layout/baseLay'
 import "../commonStyles/musicOpt.css";
+import getDateIcon from '../utils/getDay'
 
 
 function OptItem (props) {
@@ -20,7 +21,7 @@ class MusicOpt extends Component {
     super(props);
     this.displayName = "music-opt";
     
-    let specialIcon ='icon iconfont icon-rili' + (new Date().getDate());
+    let specialIcon =`icon iconfont icon-${getDateIcon()}`
 
 
     this.state = { optsList: [{ name: "每日推荐", icon: specialIcon, path: "/dayRecommend" }, { name: "音乐排行", icon: "fa fa-line-chart", path: "/orderList" }, { name: "我的歌单", icon: "fa fa-file-text", path: "/songSheet" }] };

@@ -39,7 +39,7 @@ class Play extends Component {
           {this.props.isShowList ? <div className="playlist-inner pos_abs">
               <div className="playlist-header">
                 <span className="opt-collect">收藏全部</span>
-                <span className="opt-count">播放列表(50)</span>
+                <span className="opt-count">播放列表({this.props.list.length})</span>
                 <span className="opt-clear">清空</span>
               </div>
               <div className="playlist-wrap">

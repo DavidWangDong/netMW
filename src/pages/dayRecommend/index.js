@@ -6,6 +6,7 @@ import MicroPlayer from "../../components/microPlayer.js";
 import HeaderPic from '../../components/headerPic.js';
 import RecommendSongList from "../../components/recommendSong";
 import { IndexHeader, IndexFoot, IndexBody } from "../../layout/baseLay";
+import getDateIcon from '../../utils/getDay'
 
 
 // 头图
@@ -51,7 +52,7 @@ function DayRecommendInfo(props){
     };
     return <div style={style} className="before pos_abs">
         <span className="day-time" style={style2}>
-          <i className="icon iconfont icon-rili5" style={{ fontSize: "1.2rem", color: "#fbf86a" }} />
+          <i className={`icon iconfont icon-${getDateIcon()}`} style={{ fontSize: "1.2rem", color: "#fbf86a" }} />
         </span>
         <p className="recommendDiscription" style={style3}>
           {props.info}
