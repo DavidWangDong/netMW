@@ -8,6 +8,8 @@ import OrderList from "./pages/orderList";
 import SongSheet from "./pages/songSheet";
 import SingleSheet from "./pages/singleSheet";
 import MicroPlayer from "./components/microPlayer.js";
+import SearchPage from "./pages/searchPage/index"
+
 import { IndexFoot } from "./layout/baseLay";
 
 import Modal from './components/modal'
@@ -77,6 +79,7 @@ class App extends Component {
             }
           }} />
         <Route path="/singleSheet" component={SingleSheet} />
+        <Route path="/searchPage" component={SearchPage} />
         <IndexFoot>
           <MicroPlayer />
         </IndexFoot>

@@ -29,17 +29,21 @@ function MusicOptionWrap(props){
 
 // 搜索歌曲
 function SearchMusic (props){
-    return <div
-        style={{
-          width:"5.48rem",
+    let defau = {
+         width:"5.48rem",
           margin:'0 auto',
           marginTop:"0.44rem",
+    }
 
-        }}
+    let style = Object.assign({},defau,props.style)
+    return <div
+        style={style}
       >
         {props.children}
       </div>;
 }
+
+export {SearchMusic};
 
 // 推荐歌单
 function RecommendedList (props){

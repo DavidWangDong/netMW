@@ -151,7 +151,7 @@ class SheetDetail extends Component {
        }
         return <div className="sheet-detail" style={style}>
             <div className="animate sheet-avatar pos_rel">
-              <img src={this.props.picUrl} />
+              <img src={`${this.props.picUrl}?param=200y200`} />
               <p className="sheet-detail-hover pos_abs">
                   <i className="fa fa-headphones" />
                   <span className="sheet-play-count">

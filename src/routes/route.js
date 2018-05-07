@@ -1,10 +1,10 @@
 import React from "react";
 // import { Router, Route, hashHistory } from "react-router";
-import { HashRouter, Route, Link, Switch, Redirect } from "react-router-dom";
+import { HashRouter, Route, Link, Switch, Redirect,BrowserRouter } from "react-router-dom";
 import App from '../App.js'
 const routes = (
-  <HashRouter>
+  <BrowserRouter>
     <Route path="/" component={App} />
-  </HashRouter>
+  </BrowserRouter>
 );
 export default routes;

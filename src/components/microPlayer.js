@@ -74,7 +74,7 @@ class MicroPlayer extends Component{
             <div className="micro_player_wrap">
               <div className="song_info">
                 <div className="song_avatar animate pos_rel">
-                  <img src={albumAvatar} />
+                  <img src={`${albumAvatar}?param=200y200`} />
                   {this.props.info.status == "LOADING" ? <div className="song-loading-hover pos_abs">
                       <div className="loading-icon" />
                     </div> : null}

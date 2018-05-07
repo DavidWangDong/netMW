@@ -22,7 +22,7 @@ class CellAlbum extends Component{
         return <BaseLay displayName={this.displayName}>
             <Link className="clee_album_link" to={{ pathname: "/singleSheet", state: { fromDashboard: true, param: { picUrl: picUrl || coverImgUrl, playCount: this.countFilter(playCount), name, id } } }}>
               <div className="cell_album_avatar animate">
-                <img src={this.props.avatar} />
+                <img src={`${this.props.avatar}?param=200y200`} />
               </div>
               <div className="cell_album_info">
                 <span className="album_title">{this.props.title}</span>

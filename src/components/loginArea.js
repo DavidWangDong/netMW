@@ -36,7 +36,7 @@ class LoginArea extends Component {
     let  option = this.state.isShow_opts?(<LoginOption isShow={this.state.isShow_opts} onLog={this.props.handleLog} onOut={this.props.handleOut} onEx={this.props.handleEx} key={this.displayName+'_trans'} />):(null)
     return <BaseLay displayName={this.displayName}>
         <div className="avatar animate">
-          <img src={this.props.info.avatarUrl} />>
+          <img src={`${this.props.info.avatarUrl}?param=200y200`} />>
         </div>
         <div className="user-name">{this.props.info.nickname}</div>
         <div className="login-option pos_rel" onClick={() => this.setState({

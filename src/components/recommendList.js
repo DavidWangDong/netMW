@@ -24,7 +24,7 @@ class SingleList extends Component {
         const {picUrl, playCount, name,id } = info;
         return <Link className="recommendItem" to={{ pathname: "/singleSheet", state: { fromDashboard: true, param: { picUrl, playCount: this.countFilter(playCount), name, id } } }}>
             <div className="recommend_avatar pos_rel animate">
-              <img src={picUrl} />
+              <img src={`${picUrl}?param=200y200`} />
               <p className="recommendInfo pos_abs">
                 <i className="icon fa fa-headphones" />
                 <span>{this.countFilter(playCount)}</span>

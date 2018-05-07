@@ -110,7 +110,7 @@ const actions = {
         }else{
           dispatch({
             type: "CHG_STATUS",
-            info: { status: "LOADING",curr_info:args.song||args }
+            info: { status: "LOADING" }
           });
           fetch(`${ApiHost}/music/url?id=${id}`)
           .then(data=>data.json())
@@ -125,21 +125,30 @@ const actions = {
               })
             }
           })
-          .then((data)=>{
-             const  song = args.song||args;
-             console.log(song);
-             const url = song.album.blurPicUrl;
+          .then(()=>{
+            return fetch(`${ApiHost}/song/detail?ids=${id}`)
+            .then(data=>data.json())
+            .then(json=>{
+              console.log(json);
+              return Promise.resolve(json.songs.pop().al)
+            })
+          })
+          .then((album)=>{
+             console.log(album);
+             const url = `${album.picUrl}?param=200y200`;
              return new Promise((resolve,reject)=>{
                const img = new Image()
                img.src = url;
                img.onload=()=>{
-                 resolve();
+                 resolve(url);
                }
              });
           })
-          .then(()=>{
+          .then((url)=>{
             audio.play();
-            dispatch({type:'CHG_STATUS',info:{status:'PLAYING'}})
+            const currSong = args.song||args;
+            currSong.album.picUrl=url
+            dispatch({type:'CHG_STATUS',info:{status:'PLAYING',curr_info:currSong}})
             return Promise.resolve()
           })
           .then(()=>{
