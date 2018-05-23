@@ -35,7 +35,7 @@ audio.loop=false;
 
 const initialState = {
   status: "",
-  model: "RANDOM_PLAY_CIRCLE",
+  model: "ORDER_SONG_SHEET_CIRCLE",
   curr_info: {},
   audio: audio,
   duration: 0
